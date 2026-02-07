@@ -27,4 +27,28 @@
  */
 export function checkPasswordStrength(password) {
   // Your code here
+  if(password==null) return 'weak';
+  var criteria=0;
+  var len=password.length;
+  var lower=0;
+  var upper=0;
+  var digit=0;
+  var special=0;
+  for(var i=0;i<len;i++)
+  {
+    if(password[i]>='a' && password[i]<='z') lower++;
+    else if(password[i]>='A' && password[i]<='Z') upper++;
+    else if(password[i]>='0' && password[i]<='9') digit++;
+    else special++;
+  }
+  if(upper) criteria++;
+  if(lower) criteria++;
+  if(len>=8) criteria++;
+  if(digit) criteria++;
+  if(special) criteria++;
+  
+  if(criteria<=1) return 'weak';
+  else if(criteria<=3) return 'medium';
+  else if(criteria==4) return 'strong';
+  else return 'very strong';
 }
